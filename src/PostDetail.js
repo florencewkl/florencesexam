@@ -2,41 +2,38 @@ import React from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import './style.css';
 
+function PostDetail(props){
 
-class PostDetail extends React.Component {
+    // setup an array called sections to contain our post content
+  
+    var sections = props.post.sections;
+   
+    return(
+        <div className="post-detail-view">
+        <p>Content here</p>
+            {/* -------------- Display post section by section -------------- */}
+            {
+                sections.map((s) => {
+                    // get the url of the first image from this section
+                    var imageUrl = sections.media[0].url;
+                    
+                    
+                    return (
+                        
+                        <div key={s.id} className="section">
+                            <img src = {imageUrl} className="section-image" alt="section-thumbnail"/>
+                            <div className="section-title">{s.title}</div>
 
-    constructor(props){
-        super(props);
-        this.state = {};
-    }
-
-    render(){
-
-        // setup an array called sections to contain our post content
-        var sections = this.props.post.sections;
-
-        return(
-            <div className="post-detail-view">
-                {/* -------------- Display post section by section -------------- */}
-                {
-                    sections.map((s) => {
-
-                        var imageDetail = s.media[0];
-
-                        return (
-                            <div key={s.title} className="section">
-                                <img src={imageDetail.url} className="section-image" alt="section thumbnail"/>
-                                <div className="section-title">{s.title}</div>
-                                <div className="section-description">{ReactHtmlParser(s.description)}</div>
+                            <div className="section-description">
+                            {ReactHtmlParser(s.description)}
                             </div>
-                        );
-                    })
-                }
-            </div>
-        )
-    }
+                        </div>
+                    );
+                })
+            }
+        </div>
+    )
 
 }
-
 
 export default PostDetail;

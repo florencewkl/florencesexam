@@ -1,40 +1,27 @@
 import React from 'react';
 import './style.css';
 
-class Post extends React.Component {
+function Post(props){  
+    var post = props.post;
+    var first_section = post.sections[0] || {};
+    var thumbnail = first_section.media[0].url;
 
-    constructor(props){
-        super(props);
-        this.state = {};
-    }
+    console.log(first_section); // HINT: see what is first section at your console
 
-    render(){
-        
-        // get post
-        var post = this.props.post;
-        // get first section
-        var first_section = post.sections[0] || {};
-        // get thumbnail
-        var thumbnail = first_section.media[0].url;
+    return (
+        <div className="post" onClick={() => { 
+            if(typeof props.onClick == "function") {
+                props.onClick();
+            }
+        }}>
 
-        return (
-            <div className="post" onClick={() => {
-                if(typeof this.props.onClick == "function") {
-                    this.props.onClick();
-                }
-            }}>
-                {/* --------- Post thumbnail --------- */}
-                <img src={thumbnail} className="thumbnail" alt="Section"/>
-                <div>
-                    {/* --------- Post Title --------- */}
-                    <div className="post-title">{first_section.title}</div>
-                    {/* --------- Post Title --------- */}
-                    <div className="post-time">{post.time}</div>
-                </div>
+            <img src={thumbnail} className="thumbnail" alt="Section"/>
+            <div>
+                <p className="post-title">{first_section.title}</p>
+                <p className="post-time">{post.time}</p>
             </div>
-        );
-    }
-
+        </div>
+    );
 }
 
 export default Post;
