@@ -28,6 +28,7 @@ function PostList(){
             var posts = data.data.rows;
             // update state
             setPosts(posts);
+            
         })
         // error?
         .catch((error) => {
@@ -49,7 +50,7 @@ function PostList(){
                             return (
                                 <Post key={a.id} post={a} onClick={() => {
                                     // When post onClick, we set selectedPost as a
-                                    
+                                    setSelectedPost(a);  
                                 }}/> 
                             );
                         })}

@@ -10,12 +10,11 @@ function PostDetail(props){
    
     return(
         <div className="post-detail-view">
-        <p>Content here</p>
             {/* -------------- Display post section by section -------------- */}
             {
                 sections.map((s) => {
                     // get the url of the first image from this section
-                    var imageUrl = sections.media[0].url;
+                    var imageUrl = s.media[0].url;
                     
                     
                     return (
